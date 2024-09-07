@@ -1,0 +1,129 @@
+<div class="flex flex-col md:flex-row h-screen bg-gray-900 text-white">
+  <!-- Sidebar -->
+  <div class="w-1/6 bg-gray-800 p-4 md:p-6">
+    <ul class="space-y-4">
+      <li class="cursor-pointer hover:text-blue-500">Weather</li>
+      <li class="cursor-pointer hover:text-blue-500">Cities</li>
+      <li class="cursor-pointer hover:text-blue-500">Map</li>
+      <li class="cursor-pointer hover:text-blue-500">Settings</li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="w-3/6 p-8 h-[100%] flex flex-col overflow-y-hidden">
+    <!-- Top Bar -->
+    <div class="flex justify-start mb-6">
+      <input
+        type="text"
+        placeholder="Search for cities"
+        class="w-2/4 p-2 rounded-md border border-gray-600 bg-gray-800"
+      />
+    </div>
+
+    <!-- Weather Display -->
+    <div class="flex flex-row justify-between text-start px-8 mb-8">
+      <div class="flex flex-col">
+        <h1 class="text-4xl font-semibold">{{ city }}</h1>
+
+        <p class="text-lg">
+          {{
+            selectedCityWeather?.data?.current_condition[0]?.weatherDesc[0]
+              ?.value || "No data available"
+          }}
+        </p>
+        <h2 class="text-6xl">
+          {{ selectedCityWeather?.data?.current_condition[0]?.temp_C }}&deg;C
+        </h2>
+      </div>
+      <div class="text-6xl mt-4">☀️</div>
+    </div>
+
+    <!-- Today's Forecast -->
+    <div class="bg-gray-800 p-4 rounded-lg mb-6">
+      <h3 class="text-xl font-semibold mb-2">Today's Forecast</h3>
+      <div class="flex justify-between">
+        <div class="text-center">
+          <p>6:00 AM</p>
+          <p>25&deg;</p>
+          <p>☁️</p>
+        </div>
+        <div class="text-center">
+          <p>9:00 AM</p>
+          <p>28&deg;</p>
+          <p>🌤️</p>
+        </div>
+        <div class="text-center">
+          <p>12:00 PM</p>
+          <p>33&deg;</p>
+          <p>☀️</p>
+        </div>
+        <!-- Add more as needed -->
+      </div>
+    </div>
+
+    <!-- Air Conditions -->
+    <div class="bg-gray-800 p-4 rounded-lg mb-6">
+      <h3 class="text-xl font-semibold mb-2">Air Conditions</h3>
+      <div class="flex justify-between">
+        <div>
+          <p>Real Feel: 30&deg;C</p>
+          <p>Chance of Rain: 0%</p>
+        </div>
+        <div>
+          <p>Wind: 0.2 Km/h</p>
+          <p>UV Index: 3</p>
+        </div>
+      </div>
+    </div>
+    <!-- Cities List -->
+    <div
+      class="bg-gray-800 p-4 py-24 h-full rounded-lg mb-6 flex flex-col items-center content-center justify-center md:overflow-y-scroll lg:overflow-hidden"
+    >
+      <div class="flex items-start w-full">
+        <h3 class="text-2xl font-semibold mb-2 flex items-start">Cities</h3>
+      </div>
+      <ul
+        class="space-y-4 text-center grid grid-cols-5 justify-between items-center gap-6 content-center"
+      >
+        <li
+          *ngFor="let city of cities"
+          (click)="navigateToDashboard(city)"
+          class="cursor-pointer hover:text-blue-500"
+        >
+          {{ city }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- 7-Day Forecast -->
+  </div>
+  <div class="bg-gray-800 flex flex-col w-3/12 h-[95%] p-4 mt-6 rounded-lg">
+    <h3 class="text-xl font-semibold mb-8">7-Day Forecast</h3>
+    <div
+      class="grid grid-cols-1 gap-24 font-semibold text-lg overflow-y-scroll xl:overflow-hidden"
+    >
+      <!-- Example of a single day forecast -->
+      <div
+        class="text-center xl:justify-around justify-center content-center items-center pl-4 flex xl:flex-row w-full flex-col"
+        *ngFor="let day of sevenDayForecast; let i = index"
+      >
+        <p class="xl:w-1/4 text-start">{{ getDayName(day.date) }}</p>
+        <p class="xl:w-1/4">{{ day.hourly[i].weatherDesc[0].value }}</p>
+        <p class="xl:w-1/4">
+          <span *ngIf="day.hourly[i].weatherDesc[0].value === 'Clear '"
+            >🌤️</span
+          >
+          <span *ngIf="day.hourly[i].weatherDesc[0].value === 'Sunny'">☀️</span>
+          <span *ngIf="day.hourly[i].weatherDesc[0].value === 'Cloudy'"
+            >☁️</span
+          >
+          <span *ngIf="day.hourly[i].weatherDesc[0].value === 'Rain'">🌧️</span>
+          <span *ngIf="day.hourly[i].weatherDesc[0].value === 'Storm'">⛈️</span>
+          <span *ngIf="day.hourly[i].weatherDesc[0].value === 'Snow'">❄️</span>
+          <span *ngIf="day.hourly[i].weatherDesc[0].value === 'Fog'">🌫️</span>
+        </p>
+        <p class="xl:w-1/4">{{ day.avgtempC }}&deg;</p>
+      </div>
+    </div>
+  </div>
+</div>
