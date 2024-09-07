@@ -2,10 +2,7 @@
   <!-- Sidebar -->
   <div class="w-1/6 bg-gray-800 p-4 md:p-6">
     <ul class="space-y-4">
-      <li class="cursor-pointer hover:text-blue-500">Weather</li>
-      <li class="cursor-pointer hover:text-blue-500">Cities</li>
-      <li class="cursor-pointer hover:text-blue-500">Map</li>
-      <li class="cursor-pointer hover:text-blue-500">Settings</li>
+      <li class="cursor-pointer text-3xl hover:text-blue-500">Homepage</li>
     </ul>
   </div>
 
@@ -66,22 +63,36 @@
       <h3 class="text-xl font-semibold mb-2">Air Conditions</h3>
       <div class="flex justify-between">
         <div>
-          <p>Real Feel: 30&deg;C</p>
-          <p>Chance of Rain: 0%</p>
+          <p>
+            Real Feel:
+            {{
+              selectedCityWeather?.data.current_condition[0]?.FeelsLikeC
+            }}&deg;C
+          </p>
+          <p>
+            Chance of Rain:
+            {{ selectedCityWeather?.data.weather[0]?.hourly[0]?.chanceofrain }}%
+          </p>
         </div>
         <div>
-          <p>Wind: 0.2 Km/h</p>
-          <p>UV Index: 3</p>
+          <p>
+            Wind:
+            {{ selectedCityWeather?.data.current_condition[0]?.windspeedKmph }}
+            Km/h
+          </p>
+          <p>
+            UV Index:
+            {{ selectedCityWeather?.data.current_condition[0]?.uvIndex }}
+          </p>
         </div>
       </div>
     </div>
     <!-- Cities List -->
     <div
-      class="bg-gray-800 p-4 py-24 h-full rounded-lg mb-6 flex flex-col items-center content-center justify-center md:overflow-y-scroll lg:overflow-hidden"
+      class="bg-gray-800 p-4 py-20 h-full rounded-lg mb-6 flex flex-col items-center content-center justify-center overflow-y-scroll"
     >
-      <div class="flex items-start w-full">
-        <h3 class="text-2xl font-semibold mb-2 flex items-start">Cities</h3>
-      </div>
+      <h3 class="text-2xl font-semibold mb-2 flex items-start">Cities</h3>
+
       <ul
         class="space-y-4 text-center grid grid-cols-5 justify-between items-center gap-6 content-center"
       >

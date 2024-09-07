@@ -16,6 +16,8 @@ import { NgFor, NgIf } from '@angular/common';
 })
 export class LandingComponent implements OnInit {
   weatherData: any;
+  forecastData: any;
+
   country!: string;
   countryCode!: string;
   city!: string;
@@ -48,6 +50,12 @@ export class LandingComponent implements OnInit {
         console.error('Error fetching location data', error);
       }
     );
+  }
+  getForecastData(): void {
+    this.weatherService.getForecast(this.city).subscribe((data) => {
+      this.forecastData = data;
+      console.log('forcastttttttt', this.forecastData);
+    });
   }
 
   fetchLocationInfo(latitude: number, longitude: number) {

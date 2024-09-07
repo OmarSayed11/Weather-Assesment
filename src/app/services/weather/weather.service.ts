@@ -25,4 +25,12 @@ export class WeatherService {
 
     return this.http.get(this.baseUrl, { params });
   }
+  getForecast(city: string): Observable<any> {
+    const params = new HttpParams()
+      .set('key', this.apiKey)
+      .set('q', city)
+      .set('format', 'json');
+
+    return this.http.get<any>(`${this.baseUrl}/weather.ashx`, { params });
+  }
 }

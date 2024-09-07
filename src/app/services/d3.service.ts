@@ -6,7 +6,6 @@ import * as d3 from 'd3';
 })
 export class D3Service {
   createLineChart(data: any[], element: HTMLElement): void {
-    // Select the element and remove any existing SVG
     d3.select(element).selectAll('svg').remove();
 
     const svg = d3
@@ -26,11 +25,9 @@ export class D3Service {
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    // Compute the extent of the data, ensuring no undefined values
     const xExtent = d3.extent(data, (d: any) => new Date(d.date));
     const yExtent = [0, d3.max(data, (d: any) => d.value)] as [number, number];
 
-    // Set domains with default values if extent is undefined
     x.domain(
       xExtent && xExtent[0] && xExtent[1] ? xExtent : [new Date(), new Date()]
     );
@@ -38,7 +35,6 @@ export class D3Service {
       yExtent[0] !== undefined && yExtent[1] !== undefined ? yExtent : [0, 0]
     );
 
-    // Add X-axis
     g.append('g')
       .attr('transform', `translate(0,${height})`)
       .call(d3.axisBottom(x).ticks(5));
@@ -50,7 +46,7 @@ export class D3Service {
     g.append('path')
       .datum(data)
       .attr('fill', 'none')
-      .attr('stroke', 'lightgreen') // Change line color to white
+      .attr('stroke', 'lightgreen')
       .attr('stroke-width', 2.5)
       .attr(
         'd',

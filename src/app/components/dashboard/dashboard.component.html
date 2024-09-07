@@ -7,7 +7,6 @@
     >
       &#9664; Back
     </button>
-    <!-- Current Weather Summary -->
   </div>
   <div class="bg-gray-800 p-4 rounded-lg mb-6 text-white">
     <h2 class="text-2xl font-semibold mb-2">Current Weather</h2>
@@ -26,17 +25,15 @@
     <!-- Add more current weather data as needed -->
   </div>
 
-  <!-- Historical Weather Data -->
   <div class="bg-gray-800 text-white p-4 rounded-lg">
     <h2 class="text-2xl font-semibold mb-2">Historical Weather</h2>
-    <!-- Display historical weather data here -->
-    <!-- For example, if historical data is available -->
+
     <div *ngIf="historicalWeather">
       <p>
         Average Temperature:
         {{ historicalWeather?.data?.weather[0]?.avgtempC }}&deg;C
       </p>
-      <!-- Add more historical weather data as needed -->
+
       <app-d3-line-chart
         [data]="transformHistoricalData(historicalWeather)"
       ></app-d3-line-chart>
