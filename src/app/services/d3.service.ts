@@ -6,6 +6,9 @@ import * as d3 from 'd3';
 })
 export class D3Service {
   createLineChart(data: any[], element: HTMLElement): void {
+    // Select the element and remove any existing SVG
+    d3.select(element).selectAll('svg').remove();
+
     const svg = d3
       .select(element)
       .append('svg')
@@ -47,8 +50,8 @@ export class D3Service {
     g.append('path')
       .datum(data)
       .attr('fill', 'none')
-      .attr('stroke', 'steelblue')
-      .attr('stroke-width', 1.5)
+      .attr('stroke', 'lightgreen') // Change line color to white
+      .attr('stroke-width', 2.5)
       .attr(
         'd',
         d3

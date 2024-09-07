@@ -5,6 +5,7 @@ import { LocationService } from '../../services/location/location.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { D3LineChartComponent } from '../D3/d3-line-chart/d3-line-chart.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +27,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -75,5 +77,8 @@ export class DashboardComponent implements OnInit {
         value: entry.avgtempC,
       })) || []
     );
+  }
+  goBack(): void {
+    this.router.navigate(['/']); // Replace '/' with your landing page route if it's different
   }
 }

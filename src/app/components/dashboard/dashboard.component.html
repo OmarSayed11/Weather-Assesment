@@ -1,8 +1,15 @@
-<div class="p-8">
-  <h1 class="text-4xl font-semibold">Weather for {{ city }}</h1>
-
-  <!-- Current Weather Summary -->
-  <div class="bg-gray-800 p-4 rounded-lg mb-6">
+<div class="p-8 w-full h-full bg-slate-700">
+  <div class="flex flex-row justify-between px-4">
+    <h1 class="text-4xl font-semibold">Weather for {{ city }}</h1>
+    <button
+      (click)="goBack()"
+      class="bg-blue-500 text-white float-right h-14 px-3 rounded mb-4"
+    >
+      &#9664; Back
+    </button>
+    <!-- Current Weather Summary -->
+  </div>
+  <div class="bg-gray-800 p-4 rounded-lg mb-6 text-white">
     <h2 class="text-2xl font-semibold mb-2">Current Weather</h2>
     <p class="text-lg">
       {{
@@ -20,7 +27,7 @@
   </div>
 
   <!-- Historical Weather Data -->
-  <div class="bg-gray-800 p-4 rounded-lg">
+  <div class="bg-gray-800 text-white p-4 rounded-lg">
     <h2 class="text-2xl font-semibold mb-2">Historical Weather</h2>
     <!-- Display historical weather data here -->
     <!-- For example, if historical data is available -->
